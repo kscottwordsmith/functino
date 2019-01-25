@@ -8,6 +8,12 @@ class Chat extends Component {
     message: ''
   }
 
+  componentDidMount() {
+    if(!this.props.username) {
+      this.props.history.push("/")
+    }
+  }
+
   componentWillUpdate() {
     //checks to see if the ref at messages has been scrolled all the way to the bottom
     var node = this.refs.messages
@@ -33,7 +39,10 @@ class Chat extends Component {
   //starts the Chain Of Message Updating(tm) on submit
   handleSubmit = (e) => {
     e.preventDefault()
-    addMessage(this.state.message)
+    addMessage({
+      message: this.state.message,
+      roomname: this.props.match.params.roomname
+    })
     //since we autofocus back on the input, change the value of message to be blank
     //saves literally hundreds of seconds in the long term
     this.setState({
@@ -50,7 +59,7 @@ class Chat extends Component {
           <div id="room" ref="messages">
             {this.props.messages.map((message, i) => (
               <p key={`message ${i}`}>
-                <span className="roomUsername">{message.username}</span>: {message.message}
+                <span className="roomUsername">{this.props.username}</span>: {message.message}
               </p>
             ))}
           </div>
@@ -66,9 +75,12 @@ class Chat extends Component {
   }
 }
 
-function mapStateToProps(appState) {
+function mapStateToProps(appState, ownProps) {
+  const roomname = ownProps.match.params.roomname
   return {
-    messages: appState.chatReducer.messages
+    messages: appState.chatReducer.messages.filter(message => message.roomname === roomname),
+    username: appState.chatReducer.username,
+    history: ownProps.history
   }
 }
 
