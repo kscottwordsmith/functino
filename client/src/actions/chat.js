@@ -8,11 +8,23 @@ const socket = io.connect('http://localhost:3001')
 //const socket = io.connect('http://10.68.0.181:3001')
 
 export function addMessage(message) {
-  const username = store.getState().chatReducer.username
   socket.emit('new message', {
-    username: username,
-    message: message
+    roomname: message.roomname,
+    message: message.message
   })
+}
+
+export function login(name) {
+  var promise = new Promise((resolve, reject) => {
+    store.dispatch({
+      type: 'LOGIN_USER',
+      payload: name
+    })
+
+    resolve()
+  })
+
+  return promise
 }
 
 socket.on('new message', (message) => {
