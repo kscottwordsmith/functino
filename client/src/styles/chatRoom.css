@@ -1,0 +1,57 @@
+html {box-sizing: border-box;}
+*, *:before, *:after {box-sizing: inherit;}
+
+#roomContainer {
+    width: 30%;
+    margin: 4em auto;
+    font-family: "Helvetica", sans-serif;
+    font-weight: lighter;
+    background: rgb(128, 180, 128);
+    border-radius: 10px 10px 7px 7px;
+}
+
+
+.roomwrap {
+    height: 350px;
+    border: 2px solid rgb(2, 114, 2);
+    border-radius: 10px 10px 0px 0px;
+    padding: 3px;
+}
+
+
+#room {
+    overflow:auto;
+    height:100%;
+}
+
+.roomUsername {
+    font-weight: bolder;
+}
+
+#chatInput {
+    width: 80%;
+    border-bottom-left-radius: 7px;
+    border: 2px solid rgb(0, 172, 0);
+    padding: 2px;
+    background: rgb(197, 241, 197)
+}
+
+#chatInput:focus {
+    outline: none;
+    border: 2px solid rgb(2, 114, 2);
+}
+
+#chatSubmit {
+    width: 20%;
+    padding: 2px;
+    border: 2px solid rgb(0, 172, 0);
+    border-bottom-right-radius: 7px;
+    background: rgb(0, 172, 0);
+    color: silver;
+}
+
+#chatSubmit:hover {
+    background: rgb(2, 114, 2);
+    border: 2px solid rgb(2, 114, 2);
+    color: rgb(204, 200, 200);
+}

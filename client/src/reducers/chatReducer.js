@@ -1,12 +1,13 @@
 const initialState = {
-  example: ''
+  messages: [],
+  username: 'Some Jerk'
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
     // add actions here
-    case 'EXAMPLE':
-      return {...state, example: action.example}
+    case 'ADD_MESSAGE':
+      return {...state, messages: [...state.messages, action.payload]}
     default:
       return state
   }
