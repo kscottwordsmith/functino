@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { addMessage } from '../actions/chat'
 import '../styles/chatRoom.css'
 
+import ChannelBar from './ChannelBar'
+
 class Chat extends Component {
   state = {
     message: ''
@@ -39,10 +41,18 @@ class Chat extends Component {
   //starts the Chain Of Message Updating(tm) on submit
   handleSubmit = (e) => {
     e.preventDefault()
-    addMessage({
-      message: this.state.message,
-      roomname: this.props.match.params.roomname
-    })
+    if(this.state.message !== "" && this.state.message !== " ") {
+      addMessage({
+        message: this.state.message,
+        roomname: this.props.match.params.roomname
+      })
+    } else {
+      addMessage({
+        message: '*tries to send a blank message, lol*',
+        roomname: this.props.match.params.roomname
+      })
+    }
+    
     //since we autofocus back on the input, change the value of message to be blank
     //saves literally hundreds of seconds in the long term
     this.setState({
@@ -53,24 +63,28 @@ class Chat extends Component {
   render() {
     return (
       <div id="roomContainer">
-        {/* wrap is necessary for styling and scrolling purposes */}
-        <div className="roomwrap">
-          {/* the ref goes on the room itself */}
-          <div id="room" ref="messages">
-            {this.props.messages.map((message, i) => (
-              <p key={`message ${i}`}>
-                <span className="roomUsername">{this.props.username}</span>: {message.message}
-              </p>
-            ))}
+        <ChannelBar />
+        <div id="roomAndFormWrap">
+          {/* wrap is necessary for styling and scrolling purposes */}
+          <div className="roomwrap">
+            {/* the ref goes on the room itself */}
+            <div id="room" ref="messages">
+              {this.props.messages.map((message, i) => (
+                <p key={`message ${i}`}>
+                  <span className="roomUsername">{this.props.username}</span>: {message.message}
+                </p>
+              ))}
+            </div>
           </div>
+          {/* I hate autocomplete. */}
+          <form onSubmit={this.handleSubmit} autoComplete="off" id="chatForm">
+              {/* the input's value matches the state's message value */}
+            <input type="text" name="message" value={this.state.message} onChange={this.handleChange} id="chatInput"/>
+            <button type="submit" id="chatSubmit"><i className="fa fa-chevron-right"></i></button>
+          </form>
         </div>
-        {/* I hate autocomplete. */}
-        <form onSubmit={this.handleSubmit} autoComplete="off" id="chatForm">
-            {/* the input's value matches the state's message value */}
-          <input type="text" name="message" value={this.state.message} onChange={this.handleChange} id="chatInput"/>
-          <button type="submit" id="chatSubmit"><i className="fa fa-chevron-right"></i></button>
-        </form>
       </div>
+        
     )
   }
 }
