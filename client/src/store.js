@@ -1,10 +1,10 @@
 import { createStore, combineReducers } from 'redux'
 
-import exampleReducer from './reducers/exampleReducer'
+import chatReducer from './reducers/chatReducer'
 // import all reducers here
 
 const rootReducer = combineReducers({
-  exampleReducer
+  chatReducer
   // put reducers here
 })
 
