@@ -4,17 +4,19 @@ import { login } from '../actions/chat'
 import '../styles/login.css'
 
 class Login extends Component {
-
+    //state for form changes
     state = {
         username: ''
     }
 
+    //changes state based on current value of input
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
     
+    //logs in then pushes user to default channel
     handleSubmit = (e) => {
         e.preventDefault()
         login(this.state.username).then(() => {
