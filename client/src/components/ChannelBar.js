@@ -11,10 +11,10 @@ class ChannelBar extends Component {
     }
 
     render() {
-        var channelLinks = this.props.channels.map(chan => {
+        var channelLinks = this.props.channels.map((chan, i) => {
             return (
-                <li className="channel">
-                    <Link to={`/${chan}`}>{chan}</Link>
+                <li className="channel" key={`channel-${chan}-${i}`}>
+                    <Link to={`/${chan}`}>{chan}ino</Link>
                     <button onClick={() => this.leaveChannel(chan)} className="leaveButton">-</button>
                 </li>
             )

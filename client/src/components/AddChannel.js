@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { addChannel } from '../actions/chat'
 import '../styles/addChannel.css'
 
@@ -15,10 +16,16 @@ class AddChannel extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        addChannel(this.state.chan)
-        this.setState({
-            chan: ''
-        })
+        if(!this.props.channels.includes(this.state.chan)) {
+            addChannel(this.state.chan)
+            this.setState({
+                chan: ''
+            })
+        } else {
+            this.setState({
+                chan: ''
+            })
+        }
     }
 
     render() {
@@ -38,4 +45,10 @@ class AddChannel extends Component {
     }
 }
 
-export default AddChannel
+function mapStateToProps(appState) {
+    return {
+        channels: appState.chatReducer.channels
+    }
+}
+
+export default connect(mapStateToProps)(AddChannel)
