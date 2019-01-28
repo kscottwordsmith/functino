@@ -46,8 +46,8 @@ class Login extends Component {
 
 function mapStateToProps(appState) {
     return {
-      username: appState.chatReducer.username
+        username: appState.chatReducer.username
     }
-  }
+}
   
   export default connect(mapStateToProps)(Login)
