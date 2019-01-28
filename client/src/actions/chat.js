@@ -27,9 +27,31 @@ export function login(name) {
   return promise
 }
 
+export function addChannel(channel) {
+  socket.emit('new channel', channel)
+}
+
+export function leaveChannel(channel) {
+  socket.emit('leave channel', channel)
+}
+
 socket.on('new message', (message) => {
   store.dispatch({
     type: 'ADD_MESSAGE',
     payload: message
+  })
+})
+
+socket.on('new channel', (channel) => {
+  store.dispatch({
+    type: "ADD_CHANNEL",
+    payload: channel
+  })
+})
+
+socket.on('leave channel', (channel) => {
+  store.dispatch({
+    type: "LEAVE_CHANNEL",
+    payload: channel
   })
 })
