@@ -1,0 +1,37 @@
+html {box-sizing: border-box;}
+*, *:before, *:after {box-sizing: inherit;}
+
+#addChanForm {
+    opacity: 0.5;
+    box-align: right;
+    text-align: end;
+}
+
+#addChanInput {
+    background: none;
+    border: 2px solid rgb(0, 172, 0);
+    width: 60%;
+}
+
+#addChanInput:focus {
+    outline: none;
+    background: rgb(197, 241, 197);
+}
+
+#addChanButton {
+    background: none;
+    border-radius: 15px;
+    border: 2px solid rgb(0, 172, 0);
+    color: rgb(197,241,197);
+}
+
+#addChanButton:hover {
+    background: rgb(2, 114, 2);
+    border: 2px solid rgb(2, 114, 2);
+    color: rgb(204, 200, 200);
+    cursor: pointer;
+}
+
+#addChanButton:focus {
+    outline: none;
+}

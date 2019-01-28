@@ -1,0 +1,45 @@
+html {box-sizing: border-box;}
+*, *:before, *:after {box-sizing: inherit;}
+
+#channelBarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: scroll;
+    height: 350px;
+}
+
+.channel {
+    list-style: none;
+    text-align: end;
+    margin-bottom: 8%;
+}
+
+.channel a {
+    color: black;
+    text-decoration: none;
+}
+
+.channel a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+.leaveButton {
+    background: none;
+    border-radius: 15px;
+    border: 2px solid rgb(0, 172, 0);
+    color: rgb(197,241,197);
+    margin-left: 3px;
+}
+
+.leaveButton:hover {
+    background: rgb(2, 114, 2);
+    border: 2px solid rgb(2, 114, 2);
+    color: rgb(204, 200, 200);
+    cursor: pointer;
+}
+
+.leaveButton:focus {
+    outline: none;
+}
