@@ -36,6 +36,11 @@ html {box-sizing: border-box;}
     font-weight: bolder;
 }
 
+.chatTime {
+    font-size: 9px;
+    opacity: 0.5;
+}
+
 #chatInput {
     width: 80%;
     border-bottom-left-radius: 7px;

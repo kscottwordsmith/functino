@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { addMessage } from '../actions/chat'
 import '../styles/chatRoom.css'
-
+//ChannelBar is the bar on the left side containing channels joined and the form to add channels
 import ChannelBar from './ChannelBar'
 
 class Chat extends Component {
@@ -41,15 +41,21 @@ class Chat extends Component {
   //starts the Chain Of Message Updating(tm) on submit
   handleSubmit = (e) => {
     e.preventDefault()
+    //sets the timestamp for the exact time that the submit occurred
+    //will set it to 'us-EN' by default because that's where I am currently
+    //you're not my dad
+    let timestamp = new Date(Date.now())
     if(this.state.message !== "" && this.state.message !== " ") {
       addMessage({
         message: this.state.message,
-        roomname: this.props.match.params.roomname
+        roomname: this.props.match.params.roomname,
+        timestamp: timestamp.toLocaleTimeString('us-EN')
       })
     } else {
       addMessage({
         message: '*tries to send a blank message, lol*',
-        roomname: this.props.match.params.roomname
+        roomname: this.props.match.params.roomname,
+        timestamp: timestamp.toLocaleTimeString('us-EN')
       })
     }
     
@@ -71,7 +77,8 @@ class Chat extends Component {
             <div id="room" ref="messages">
               {this.props.messages.map((message, i) => (
                 <p key={`message ${i}`}>
-                  <span className="roomUsername">{this.props.username}</span>: {message.message}
+                  {/* displays the username, the message, then the timestamp of the message */}
+                  <span className="roomUsername">{this.props.username}</span>: {message.message} <span className="chatTime">{message.timestamp}</span>
                 </p>
               ))}
             </div>

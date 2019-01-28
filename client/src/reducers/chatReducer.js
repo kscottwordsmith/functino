@@ -11,7 +11,7 @@ export default function (state = initialState, action) {
   switch (action.type) {
     case 'ADD_MESSAGE':
       //returns the messages with the new message at bottom
-      return {...state, messages: [...state.messages, action.payload]}
+      return {...state, messages: [...state.messages, action.payload.message]}
     case 'LOGIN_USER':
       //sets the username for use in Chat.js
       return {...state, username: action.payload}

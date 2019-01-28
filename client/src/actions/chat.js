@@ -11,7 +11,7 @@ const socket = io.connect('http://localhost:3001')
 export function addMessage(message) {
   socket.emit('new message', {
     roomname: message.roomname,
-    message: message.message
+    message: message
   })
 }
 
