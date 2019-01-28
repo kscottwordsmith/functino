@@ -23,6 +23,7 @@ html {box-sizing: border-box;}
     border-radius: 15px;
     border: 2px solid rgb(0, 172, 0);
     color: rgb(197,241,197);
+    margin-right: 3px;
 }
 
 #addChanButton:hover {

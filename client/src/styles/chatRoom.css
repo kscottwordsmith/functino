@@ -17,6 +17,14 @@ html {box-sizing: border-box;}
     flex-basis: 70%;
 }
 
+#nameWrap {
+    padding: 1%;
+    width: 100%;
+    background: rgb(189, 239, 189);
+    border-radius: 7px;
+    border: 2px solid rgb(2, 114, 2);
+}
+
 .roomwrap {
     display: flex;
     flex-direction: column;

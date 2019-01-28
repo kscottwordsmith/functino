@@ -1,6 +1,7 @@
 const initialState = {
   messages: [],
   username: '',
+  currentRoom: '',
   channels: ["default"]
 }
 
@@ -15,6 +16,8 @@ export default function (state = initialState, action) {
     case 'LOGIN_USER':
       //sets the username for use in Chat.js
       return {...state, username: action.payload}
+    case 'SET_CURRENT':
+      return {...state, currentRoom: action.payload}
     case 'ADD_CHANNEL':
       //returns the channels with the new channel at bottom
       return {...state, channels: [...state.channels, action.payload]}

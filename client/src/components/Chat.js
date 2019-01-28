@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addMessage } from '../actions/chat'
+import { addMessage, setCurrent } from '../actions/chat'
 import '../styles/chatRoom.css'
 //ChannelBar is the bar on the left side containing channels joined and the form to add channels
 import ChannelBar from './ChannelBar'
@@ -14,6 +14,7 @@ class Chat extends Component {
     if(!this.props.username) {
       this.props.history.push("/")
     }
+    setCurrent(this.props.match.params.roomname)
   }
 
   componentWillUpdate() {
@@ -67,10 +68,16 @@ class Chat extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <div id="roomContainer">
         <ChannelBar />
         <div id="roomAndFormWrap">
+          <div id="nameWrap">
+            <span id="roomName">
+              #{this.props.match.params.roomname}
+            </span>
+          </div>
           {/* wrap is necessary for styling and scrolling purposes */}
           <div className="roomwrap">
             {/* the ref goes on the room itself */}

@@ -37,7 +37,8 @@ class ChannelBar extends Component {
 
 function mapStateToProps(appState) {
     return {
-        channels: appState.chatReducer.channels
+        channels: appState.chatReducer.channels,
+        currentRoom: appState.chatReducer.currentRoom
     }
 }
 

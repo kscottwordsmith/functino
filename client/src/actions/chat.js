@@ -29,7 +29,7 @@ export function login(name) {
   return promise
 }
 
-//emits to socket that a new channel is to be added
+//emits to socket that a new channel is to be added by name
 export function addChannel(channel) {
   socket.emit('new channel', channel)
 }
@@ -37,6 +37,13 @@ export function addChannel(channel) {
 //emits to socket that a channel is to be removed
 export function leaveChannel(channel) {
   socket.emit('leave channel', channel)
+}
+
+export function setCurrent(channel) {
+  store.dispatch({
+    type: "SET_CURRENT",
+    payload: channel
+  })
 }
 
 //we've received a new message, dispatches to add it to messages array
