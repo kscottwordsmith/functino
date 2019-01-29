@@ -44,9 +44,50 @@ html {box-sizing: border-box;}
     font-weight: bolder;
 }
 
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
 .chatTime {
     font-size: 9px;
     opacity: 0.5;
+}
+
+.styleButton {
+    background: none;
+    border: 2px solid rgb(0, 172, 0);
+    border-radius: 10px;
+}
+
+.styleButton:hover {
+    background: rgb(2, 114, 2);
+    border: 2px solid rgb(2, 114, 2);
+    color: rgb(204, 200, 200);
+}
+
+.styleButton:focus {
+    outline: none;
+    background: rgb(2, 114, 2);
+    border: 2px solid rgb(2, 114, 2);
+    color: rgb(204, 200, 200);
+}
+
+#colorInput {
+    background: none;
+    border: 2px solid rgb(0, 172, 0);
+}
+
+#colorInput:hover {
+    background: rgb(2, 114, 2);
+    border: 2px solid rgb(2, 114, 2);
 }
 
 #chatInput {

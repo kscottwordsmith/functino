@@ -7,7 +7,11 @@ import ChannelBar from './ChannelBar'
 
 class Chat extends Component {
   state = {
-    message: ''
+    message: '',
+    bold: '',
+    italic: '',
+    underline: '',
+    color: '#000000'
   }
 
   componentDidMount() {
@@ -39,6 +43,47 @@ class Chat extends Component {
     })
   }
 
+  //changes bold, italic, or underline
+  //if it has it already, remove it, otherwise, add it
+  changeBold = (e) => {
+    e.preventDefault()
+    if(this.state.bold === 'bold') {
+      this.setState({
+        bold: ''
+      })
+    } else {
+      this.setState({
+        bold: 'bold'
+      })
+    }
+  }
+
+  changeItalic = (e) => {
+    e.preventDefault()
+    if(this.state.italic === 'italic') {
+      this.setState({
+        italic: ''
+      })
+    } else {
+      this.setState({
+        italic: 'italic'
+      })
+    }
+  }
+
+  changeUnderline = (e) => {
+    e.preventDefault()
+    if(this.state.underline === 'underline') {
+      this.setState({
+        underline: ''
+      })
+    } else {
+      this.setState({
+        underline: 'underline'
+      })
+    }
+  }
+
   //starts the Chain Of Message Updating(tm) on submit
   handleSubmit = (e) => {
     e.preventDefault()
@@ -50,7 +95,11 @@ class Chat extends Component {
       addMessage({
         message: this.state.message,
         roomname: this.props.match.params.roomname,
-        timestamp: timestamp.toLocaleTimeString('us-EN')
+        timestamp: timestamp.toLocaleTimeString('us-EN'),
+        bold: this.state.bold,
+        italic: this.state.italic,
+        underline: this.state.underline,
+        color: this.state.color
       })
     } else {
       addMessage({
@@ -63,12 +112,14 @@ class Chat extends Component {
     //since we autofocus back on the input, change the value of message to be blank
     //saves literally hundreds of seconds in the long term
     this.setState({
-      message: ''
+      message: '',
+      bold: '',
+      italic: '',
+      underline: ''
     })
   }
 
   render() {
-    console.log(this.props)
     return (
       <div id="roomContainer">
         <ChannelBar />
@@ -85,11 +136,25 @@ class Chat extends Component {
               {this.props.messages.map((message, i) => (
                 <p key={`message ${i}`}>
                   {/* displays the username, the message, then the timestamp of the message */}
-                  <span className="roomUsername">{this.props.username}</span>: {message.message} <span className="chatTime">{message.timestamp}</span>
+                  <span className="roomUsername">{this.props.username}: </span> 
+                  {/* if the message has bold, italic, or underline, add the relevant class */}
+                  <span className={`${message.bold === 'bold' ? message.bold : undefined} 
+                  ${message.italic === 'italic' ? message.italic : undefined}
+                  ${message.underline === 'underline' ? message.underline : undefined}`}
+                  style = {{color: message.color}}>
+                    {message.message}
+                  </span> 
+                  <span className="chatTime"> {message.timestamp}</span>
                 </p>
               ))}
             </div>
           </div>
+          {/* buttons to add bold, italic, and underline
+          does not have fine-tuned control yet */}
+          <button onClick={this.changeBold} className="styleButton"><i className="fa fa-bold"></i></button>
+          <button onClick={this.changeItalic} className="styleButton"><i className="fa fa-italic"></i></button>
+          <button onClick={this.changeUnderline} className="styleButton"><i className="fa fa-underline"></i></button>
+          <input type="color" onChange={this.handleChange} value={this.state.color} id="colorInput" name="color" />
           {/* I hate autocomplete. */}
           <form onSubmit={this.handleSubmit} autoComplete="off" id="chatForm">
               {/* the input's value matches the state's message value */}
