@@ -126,7 +126,7 @@ class Chat extends Component {
         <div id="roomAndFormWrap">
           <div id="nameWrap">
             <span id="roomName">
-              #{this.props.match.params.roomname}
+              (#{this.props.match.params.roomname})
             </span>
           </div>
           {/* wrap is necessary for styling and scrolling purposes */}

@@ -20,11 +20,18 @@ class AddChannel extends Component {
         e.preventDefault()
         //if the channels list does not contain what the user tries to input
         if(!this.props.channels.includes(this.state.chan)) {
-            //add the channel then reset the field
-            addChannel(this.state.chan)
-            this.setState({
-                chan: ''
-            })
+            //if it includes a space, it's invalid, don't add it
+            if(this.state.chan.includes(" ")) {
+                this.setState({
+                    chan: ''
+                })
+            } else {
+                //add the channel then reset the field
+                addChannel(this.state.chan)
+                this.setState({
+                    chan: ''
+                })
+            }
         } else {
             //if the channel already exists, reset the field but do not add the channel
             this.setState({

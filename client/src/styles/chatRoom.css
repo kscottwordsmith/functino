@@ -1,4 +1,4 @@
-html {box-sizing: border-box;}
+html {box-sizing: border-box; background: rgb(29, 8, 48);}
 *, *:before, *:after {box-sizing: inherit;}
 
 #roomContainer {
@@ -21,7 +21,8 @@ html {box-sizing: border-box;}
     padding: 1%;
     width: 100%;
     background: rgb(189, 239, 189);
-    border-radius: 7px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
     border: 2px solid rgb(2, 114, 2);
 }
 
@@ -30,7 +31,6 @@ html {box-sizing: border-box;}
     flex-direction: column;
     height: 350px;
     border: 2px solid rgb(2, 114, 2);
-    border-radius: 10px 10px 0px 0px;
     padding: 3px;
     background: rgb(189, 239, 189);
 }
@@ -89,6 +89,10 @@ html {box-sizing: border-box;}
 #colorInput:hover {
     background: rgb(2, 114, 2);
     border: 2px solid rgb(2, 114, 2);
+}
+
+#colorInput:focus {
+    outline: none;
 }
 
 #chatInput {

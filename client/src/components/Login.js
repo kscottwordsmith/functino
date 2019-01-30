@@ -40,7 +40,7 @@ class Login extends Component {
                     />
                     <button type="submit" id="loginSubmit"><i className="fa fa-chevron-right"></i></button>
                 </form>
-                <p id="loginWelcomeBottom">functino</p>
+                <p id="loginWelcomeBottom">functino()</p>
             </div>
         )
     }
