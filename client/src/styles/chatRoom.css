@@ -24,6 +24,12 @@ html {box-sizing: border-box; background: rgb(29, 8, 48);}
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     border: 2px solid rgb(2, 114, 2);
+    display: flex;
+    justify-content: space-between;
+}
+
+#roomName {
+    padding-top: 1%;
 }
 
 .roomwrap {

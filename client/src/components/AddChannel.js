@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
 import { addChannel } from '../actions/chat'
 import '../styles/addChannel.css'
@@ -25,6 +25,11 @@ class AddChannel extends Component {
                 this.setState({
                     chan: ''
                 })
+            } else if (this.state.chan.length > 12) {
+                //if it's longer than 12 characters, I don't want it
+                this.setState({
+                    chan: ''
+                })
             } else {
                 //add the channel then reset the field
                 addChannel(this.state.chan)
@@ -43,17 +48,20 @@ class AddChannel extends Component {
     //renders a form and a button
     render() {
         return (
-            <form onSubmit={this.handleSubmit} autoComplete="off" id="addChanForm">
-                <input
-                    type="text"
-                    onChange={this.handleChange}
-                    name="chan"
-                    value={this.state.chan}
-                    placeholder="add channel"
-                    id="addChanInput"
-                />
-                <button type="submit" id="addChanButton">+</button>
-            </form>
+            <Fragment>
+                <form onSubmit={this.handleSubmit} autoComplete="off" id="addChanForm">
+                    <input
+                        type="text"
+                        onChange={this.handleChange}
+                        name="chan"
+                        value={this.state.chan}
+                        placeholder="add channel"
+                        id="addChanInput"
+                    />
+                    <button type="submit" id="addChanButton">+</button>
+                </form>
+                <p id="addChanText">Channel must have 12 or fewer characters</p>
+            </Fragment>
         )
     }
 }

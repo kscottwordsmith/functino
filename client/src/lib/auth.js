@@ -127,7 +127,8 @@ const AuthContext = React.createContext({
 
 export class Authentication extends Component {
   state = {
-    isAuthenticated: api.loggedIn()
+    isAuthenticated: api.loggedIn(),
+    profile: api.getProfile()
   }
 
   static defaultProps = {
@@ -140,7 +141,8 @@ export class Authentication extends Component {
       api.login(username, password)
       .then(data => {
         this.setState({
-          isAuthenticated: true
+          isAuthenticated: true,
+          profile: api.getProfile()
         })
         resolve()
       }).catch(err => {
@@ -166,7 +168,8 @@ export class Authentication extends Component {
       isAuthenticated: this.state.isAuthenticated,
       redirectUrl: this.props.redirectUrl,
       signin: this.signin,
-      signout: this.signout
+      signout: this.signout,
+      profile: this.state.profile
     }
 
     return (

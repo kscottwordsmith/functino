@@ -1,13 +1,17 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 import Router from './routes/example'
+import AuthRouter from './routes/auth'
+import expressjwt from 'express-jwt'
+import config from 'config'
 
 const app = express()
 
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
 
-app.use('/api', Router)
+app.use('/api', AuthRouter)
+app.use('/api', expressjwt({secret: config.get('jwtsecret')}), Router)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

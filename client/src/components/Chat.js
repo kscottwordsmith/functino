@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { addMessage, setCurrent } from '../actions/chat'
+import { addMessage, setCurrent, logoutPurge } from '../actions/chat'
 import '../styles/chatRoom.css'
 //ChannelBar is the bar on the left side containing channels joined and the form to add channels
 import ChannelBar from './ChannelBar'
+import { withAuth } from '../lib/auth'
 
 class Chat extends Component {
   state = {
@@ -15,9 +16,6 @@ class Chat extends Component {
   }
 
   componentDidMount() {
-    if(!this.props.username) {
-      this.props.history.push("/")
-    }
     setCurrent(this.props.match.params.roomname)
   }
 
@@ -41,6 +39,14 @@ class Chat extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+
+  //when user signs out, signout thru auth, then purge the current appState
+  //mostly to remove the username, shh it's not too extreme it's okay
+  handleSignout = (e) => {
+    e.preventDefault()
+    this.props.signout()
+    logoutPurge()
   }
 
   //changes bold, italic, or underline
@@ -122,12 +128,13 @@ class Chat extends Component {
   render() {
     return (
       <div id="roomContainer">
-        <ChannelBar />
+        <ChannelBar {...this.props} />
         <div id="roomAndFormWrap">
           <div id="nameWrap">
             <span id="roomName">
               (#{this.props.match.params.roomname})
             </span>
+            <button onClick={this.handleSignout} className="styleButton"><i className="fa fa-sign-out"></i></button>
           </div>
           {/* wrap is necessary for styling and scrolling purposes */}
           <div className="roomwrap">
@@ -137,11 +144,11 @@ class Chat extends Component {
                 <p key={`message ${i}`}>
                   {/* displays the username, the message, then the timestamp of the message */}
                   <span className="roomUsername">{this.props.username}: </span> 
-                  {/* if the message has bold, italic, or underline, add the relevant class */}
-                  <span className={`${message.bold === 'bold' ? message.bold : undefined} 
-                  ${message.italic === 'italic' ? message.italic : undefined}
-                  ${message.underline === 'underline' ? message.underline : undefined}`}
-                  style = {{color: message.color}}>
+                  {/* if the message has bold, italic, or underline, change the relevant style */}
+                  <span style = {{color: message.color, 
+                                  fontWeight: message.bold, 
+                                  fontStyle: message.italic, 
+                                  textDecoration: message.underline}}>
                     {message.message}
                   </span> 
                   <span className="chatTime"> {message.timestamp}</span>
@@ -172,9 +179,9 @@ function mapStateToProps(appState, ownProps) {
   const roomname = ownProps.match.params.roomname
   return {
     messages: appState.chatReducer.messages.filter(message => message.roomname === roomname),
-    username: appState.chatReducer.username,
+    username: ownProps.profile.username,
     history: ownProps.history
   }
 }
 
-export default connect(mapStateToProps)(Chat)
+export default withAuth(connect(mapStateToProps)(Chat))

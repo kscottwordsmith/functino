@@ -26,6 +26,8 @@ export default function (state = initialState, action) {
       //then returns that filtered array
       let lessChans = state.channels.filter(chan => chan !== action.payload)
       return {...state, channels: lessChans}
+    case 'LOGOUT_PURGE':
+      return {messages: [], username: '', currentRoom: '', channels: ["default"]}
     default:
       return state
   }

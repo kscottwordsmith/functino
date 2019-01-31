@@ -1,7 +1,7 @@
 html {box-sizing: border-box;}
 *, *:before, *:after {box-sizing: inherit;}
 
-#loginContainer {
+#registerContainer {
     width: 30%;
     margin: 4em auto;
     font-family: "Helvetica", sans-serif;
@@ -12,56 +12,46 @@ html {box-sizing: border-box;}
     flex-direction: column;
 }
 
-#loginWelcomeTop {
+#registerTopLabel {
     text-align: center;
-    font-size: 2em;
+    font-size: 1em;
 }
 
-.loginInput {
+.registerInput {
     width: 80%;
     padding-left: 2px;
     border: 2px solid rgb(0, 172, 0);
     background: rgb(197, 241, 197);
 }
 
-.loginInput:focus {
+.registerInput:focus {
     outline: none;
     border: 2px solid rgb(2, 114, 2);
 }
 
-#loginSubmit {
+#registerUser {
+    border-top-left-radius: 8px;
+}
+
+#registerPass {
+    border-bottom-left-radius: 8px;
+}
+
+#registerSubmit {
     width: 20%;
     padding: 2px;
     border: 2px solid rgb(0, 172, 0);
+    border-bottom-right-radius: 8px;
     background: rgb(0, 172, 0);
     color: silver;
 }
 
-#loginSubmit:hover {
+#registerSubmit:hover {
     background: rgb(2, 114, 2);
     border: 2px solid rgb(2, 114, 2);
     color: rgb(204, 200, 200);
 }
 
-#loginSubmit:focus {
+#registerSubmit:focus {
     outline: none;
-}
-
-#regLink {
-    font-size: 14px;
-    opacity: 0.5;
-}
-
-#regLink:hover {
-    opacity: 1;
-}
-
-#regLink:visited {
-    color: black;
-}
-
-#loginWelcomeBottom {
-    text-align: center;
-    font-size: 2em;
-    letter-spacing: 0.5em;
 }

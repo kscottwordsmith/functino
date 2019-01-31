@@ -1,8 +1,9 @@
 {
   "db": {
     "host": "localhost",
-    "user": "",
-    "password": "",
-    "database": ""
-  }
+    "user": "functino",
+    "password": "functino",
+    "database": "functino_profiles"
+  },
+  "jwtsecret": "E_z2E^waAgT}LV#@"
 }
