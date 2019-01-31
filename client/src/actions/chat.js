@@ -7,6 +7,24 @@ axios.defaults.baseURL = '/api'
 const socket = io.connect('http://localhost:3001')
 //const socket = io.connect('http://10.68.0.181:3001')
 
+export function registerUser(username, password) {
+  axios.post('/register', {
+    username: username,
+    password: password
+  }).then(resp => {
+    store.dispatch({
+      type: 'LOGIN_USER',
+      payload: username
+    })
+  })
+}
+
+export function logoutPurge() {
+  store.dispatch({
+    type: 'LOGOUT_PURGE'
+  })
+}
+
 //sends emits to socket that the specified room name has a new message
 export function addMessage(message) {
   socket.emit('new message', {

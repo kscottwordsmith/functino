@@ -1,35 +1,31 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
-import '../styles/login.css'
-import { withAuth } from '../lib/auth'
+import { registerUser } from '../actions/chat'
 
-class Login extends Component {
-    //state for form changes
+import '../styles/register.css'
+
+class Register extends Component {
     state = {
         username: '',
         password: ''
     }
 
-    //changes state based on current value of input
     handleChange = (e) => {
         this.setState({
             [e.target.name]: e.target.value
         })
     }
-    
-    //logs in then pushes user to default channel
+
     handleSubmit = (e) => {
         e.preventDefault()
-
-        this.props.signin(this.state.username, this.state.password).then(() => {
-            this.props.history.push('/default')
-        })
+        registerUser(this.state.username, this.state.password)
+        //pushes to login page. for security reasons. yeah. security.
+        this.props.history.push('/')
     }
 
     render() {
         return (
-            <div id="loginContainer">
-                <p id="loginWelcomeTop">Welcome to</p>
+            <div id="registerContainer">
+                <p id="registerTopLabel">Create a username and password:</p>
                 <form onSubmit={this.handleSubmit} autoComplete="off" id="loginForm">
                     {/* the input's value matches the state's message value */}
                     <input 
@@ -37,7 +33,8 @@ class Login extends Component {
                         name="username" 
                         value={this.state.username} 
                         onChange={this.handleChange} 
-                        className="loginInput"
+                        className="registerInput"
+                        id="registerUser"
                         placeholder="Enter a username"
                     />
                     <input 
@@ -45,16 +42,15 @@ class Login extends Component {
                         name="password" 
                         value={this.state.password} 
                         onChange={this.handleChange} 
-                        className="loginInput"
+                        className="registerInput"
+                        id="registerPass"
                         placeholder="Enter a password"
                     />
-                    <button type="submit" id="loginSubmit"><i className="fa fa-chevron-right"></i></button>
+                    <button type="submit" id="registerSubmit"><i className="fa fa-chevron-right"></i></button>
                 </form>
-                <span id="regLink"><Link to="/register">Create Account</Link></span>
-                <p id="loginWelcomeBottom">functino()</p>
             </div>
         )
     }
 }
-  
-  export default withAuth(Login)
+
+export default Register

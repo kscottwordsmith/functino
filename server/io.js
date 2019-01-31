@@ -25,6 +25,6 @@ export default function(server) {
       socket.emit('leave channel', channel)
     })
 
-    console.log('User has connected to socket server')
+    console.log('User has connected to socket server')  
   })
 }

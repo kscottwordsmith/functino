@@ -6,16 +6,32 @@ import AddChannel from './AddChannel'
 import { leaveChannel as leaveChan } from '../actions/chat'
 
 class ChannelBar extends Component {
+
+    //when you leave a channel, it boots you back to default
+    handleLeave = (chan) => {
+        leaveChan(chan)
+        this.props.history.push('/default')
+    }
+
     render() {
         //maps all the channel names as links
         var channelLinks = this.props.channels.map((chan, i) => {
-            return (
-                <li className="channel" key={`channel-${chan}-${i}`}>
-                    <Link to={`/${chan}`}>#{chan}ino</Link>
-                    {/* leaves channel based on channel name */}
-                    <button onClick={() => leaveChan(chan)} className="leaveButton">-</button>
-                </li>
-            )
+            if(chan !== 'default') {
+                return (
+                    <li className="channel" key={`channel-${chan}-${i}`}>
+                        <Link to={`/${chan}`}>#{chan}ino</Link>
+                        {/* leaves channel based on channel name */}
+                        <button onClick={() => this.handleLeave(chan)} className="leaveButton">-</button>
+                    </li>
+                )
+            } else {
+                return (
+                    <li className="channel" key={`channel-${chan}-${i}`}>
+                        <Link to={`/${chan}`}>#{chan}ino</Link>
+                    </li>
+                )
+            }
+            
         })
         return (
             <div id="leftBarWrap">
@@ -34,7 +50,7 @@ class ChannelBar extends Component {
 function mapStateToProps(appState) {
     return {
         channels: appState.chatReducer.channels,
-        currentRoom: appState.chatReducer.currentRoom
+        currentRoom: appState.chatReducer.currentRoom,
     }
 }
 
